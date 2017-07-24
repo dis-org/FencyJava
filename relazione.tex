@@ -7,9 +7,11 @@
     linkcolor=blue
 }
 
-\title{{\Huge Fancy}\\\ \\
-Simulatore di scherma per Android\\
-con riconoscimento di gestures}
+\title{
+\begin{Huge}
+Fency\\\ \\
+\end{Huge}
+Simulatore di scherma per Android\\con riconoscimento di gestures}
 \author{Francesco Bultrini, matricola 278696\\
  Claudio Pannacci, matricola 283526}
 \date{Anno accademico 2016-2017}
@@ -24,17 +26,22 @@ con riconoscimento di gestures}
 
 \newpage
 
-\part{Obiettivo}
+\subsection{Abstract}
 L'obiettivo di questo progetto è la realizzazione di un gioco  ispirato allo sport della scherma, per cellulari dotati di sistema operativo Android.\\ Il gioco, nella sua versione finale, consisterà in una sfida locale tra due giocatori, dotati entrambi di dispositivo Android, dove lo scambio di informazioni avverrà tramite Bluetooth. Si valuta anche la possibilità di utilizzare la tecnologia NFC per eseguire il \hyperref[pairing]{\emph{pairing}} dei dispositivi.\\ Il movimento principale tra le tecniche della scherma è l'affondo, del quale verrà descritta e riconosciuta la \hyperref[gesture]{\emph{gesture}} in modo accurato.
-\newpage
 
-\part{Analisi}
-Al fine di riconoscere le \hyperref[gesture]{\emph{gestures}} si deve accedere, tramite classi di sistema, ai valori di accelerometro, giroscopio e magnetometro. Per ridurre il dominio dei movimenti da analizzare, sarà necessario definire un orientamento del telefono (in direzione orizzontale, con lo schermo rivolto verso l'alto) assicurandosi che tale stato venga mantenuto durante il suo spostamento.\\ A questo scopo la classe SensorFusion di Paul Lawitzki, che combina i dati del giroscopio a quelli del magnetometro, riduce il rumore e permette di avere informazioni affidabili sull'orientamento del dispositivo tramite i valori di Pitch, Roll e Azimuth. La descrizione dell'affondo si basa sui dati forniti dall'accelerometro e, utilizzando la modalità Linear Movement, si hanno i valori di accelerazione sui tre assi, senza la componente gravitazionale. Il movimento causa un'accelerazione positiva sull'asse Y (che attraversa per lungo il dispositivo) seguito da una accelerazione di modulo maggiore, stesso verso ma direzione opposta, dovuta all'arresto del dispositivo nel momento in cui si conclude l'affondo.
+\newpage
+\section{Analisi}
+\subsection{Analisi dei requisiti}
+Al fine di riconoscere le \hyperref[gesture]{\emph{gestures}} si deve accedere, tramite classi di sistema, ai valori di accelerometro, giroscopio e magnetometro. Per ridurre il dominio dei movimenti da analizzare, sarà necessario definire un orientamento del telefono (in direzione orizzontale, con lo schermo rivolto verso l'alto) assicurandosi che tale stato venga mantenuto durante lo spostamento.\\ A questo scopo la classe SensorFusion di Paul Lawitzki, che combina i dati del giroscopio a quelli del magnetometro riducendo il rumore, permette di avere informazioni affidabili sull'orientamento del dispositivo tramite i valori di \hyperref[pitch]{\emph{pitch}}, \hyperref[roll]{\emph{roll}} e \hyperref[azimuth]{\emph{azimuth}}. La descrizione dell'affondo si basa sui dati forniti dall'accelerometro e, utilizzando la modalità Linear Movement, si hanno i valori di accelerazione sui tre assi, senza la componente gravitazionale. Il movimento causa un'accelerazione positiva sull'asse Y (che attraversa per lungo il dispositivo) seguito da una accelerazione di modulo maggiore, stesso verso ma direzione opposta, dovuta all'arresto del dispositivo nel momento in cui si conclude l'affondo. Questo non basta ad impedire ad altri movimenti (come lo squotimento) di essere classificati come affondi, infatti per accertarsi dell'effettivo spostamento del dispositivo, conoscerne l'accelerazione non basta ma è necessario anche stimare la durata del movimento.
+\subsection{Modello di sviluppo}
 \newpage
 
 \section*{Glossario}
-\textbf{gesture}: definizione\\ \label{gesture}\textbf{pairing}: definizione\\ \label{pairing}
-
-
+\ 
+\textbf{gesture}: definizione\\ \label{gesture}
+\textbf{pairing}: definizione\\ \label{pairing}
+\textbf{pitch}: definizione\\ \label{pitch}
+\textbf{roll}: definizione\\ \label{roll}
+\textbf{azimuth}: definizione\\ \label{azimuth}
 
 \end{document}
