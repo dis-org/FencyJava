@@ -13,11 +13,21 @@ public class Player {
     }
 
     public void changeState(int to){
-        state = to; //LOL
+        //if(state != to){
+            state = to;
+
+            activity.updateView(this);
+        //}
+
+
     }
 
     public String toString(){
         String str = "Stato = "+ state;
         return str;
+    }
+
+    public int getState() {
+        return state;
     }
 }

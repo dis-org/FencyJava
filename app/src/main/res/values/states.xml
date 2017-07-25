@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="INVALID">-1</integer>
+    <integer name="HIGH_STAND">0</integer>
+    <integer name="LOW_STAND">1</integer>
+    <integer name="HIGH_ATTACK">2</integer>
+    <integer name="LOW_ATTACK">3</integer>
+</resources>
