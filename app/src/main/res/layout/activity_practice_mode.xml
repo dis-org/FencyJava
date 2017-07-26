@@ -30,7 +30,7 @@
         android:text="tutorial command here"
         android:textAlignment="center"
         android:textColor="@color/brown_ink"
-        android:textSize="30sp"
+        android:textSize="36sp"
         android:textStyle="bold" />
 
     <TextView
@@ -44,7 +44,7 @@
         android:text="tutorial check here"
         android:textAlignment="center"
         android:textColor="@color/black_overlay"
-        android:textSize="18sp" />
+        android:textSize="30sp" />
 
     <ImageView
         android:id="@+id/ivPlayerState"

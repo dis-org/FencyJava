@@ -13,6 +13,4 @@ public abstract class FencyModel {
         this.activity = activity;
         state = 0;
     }
-
-
 }

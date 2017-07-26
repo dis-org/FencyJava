@@ -4,12 +4,11 @@ package com.example.claudio.fency;
  * Created by Francesco on 25/07/2017.
  */
 
-public class Player {
-    private FencyModeActivity activity;
-    private int state;
+public class Player extends FencyModel{
 
     public Player(FencyModeActivity activity){
-        this.activity = activity;
+        super(activity);
+        state = R.integer.HIGH_STAND;
     }
 
     public void changeState(int to){

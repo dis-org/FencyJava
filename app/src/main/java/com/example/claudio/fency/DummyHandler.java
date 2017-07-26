@@ -3,11 +3,9 @@ package com.example.claudio.fency;
 import android.os.Handler;
 import android.widget.Toast;
 
-/**
- * Created by Francesco on 25/07/2017.
- */
-
 public class DummyHandler extends FencyHandler{
+
+    private long WAITING_TIME = 2500;
 
     private int state;
     private Handler handler;
@@ -19,23 +17,19 @@ public class DummyHandler extends FencyHandler{
         state = 0;
     }
 
-    public void start(){
-        Toast.makeText(context,"FINE TUTORIAL", Toast.LENGTH_LONG).show();
-    }
+    public void step( boolean success){
 
-    public void step(){
+        if(success) state= (state+1)%4;
 
-        ((PracticeModeActivity)context).impera(toAction());
+        ((PracticeModeActivity)context).impera(toImperium());
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Allow player image change only after delay
+                // Allow player state change only after delay
                 player.changeState(toAction());
-                start();
             }
-        }, 1000);
-
+        }, WAITING_TIME);
 
     }
 
@@ -49,13 +43,33 @@ public class DummyHandler extends FencyHandler{
                 action = R.integer.LOW_ATTACK;
                 break;
             case 2:
-                action = R.integer.LOW_STAND;
+                action = R.integer.HIGH_STAND;
                 break;
             case 3:
-                action = R.integer.HIGH_STAND;
+                action = R.integer.LOW_STAND;
                 break;
         }
         return action;
     }
+
+    public int toImperium(){
+        int action = -1;
+        switch (this.state){
+            case 0:
+                action = R.integer.HIGH_STAND;
+                break;
+            case 1:
+                action = R.integer.LOW_STAND;
+                break;
+            case 2:
+                action = R.integer.LOW_ATTACK;
+                break;
+            case 3:
+                action = R.integer.HIGH_ATTACK;
+                break;
+        }
+        return action;
+    }
+
 
 }

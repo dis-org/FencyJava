@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class PracticeModeActivity extends FencyModeActivity {
 
     private static final long ATTACK_ANIMATION_DELAY = 500; //milliseconds
-
+    private static final long SERVICE_TIME= 1500;
 
     private DummyHandler arbiter;
     private ImageView discipuli;
@@ -34,14 +34,10 @@ public class PracticeModeActivity extends FencyModeActivity {
         approbatio = (TextView)findViewById(R.id.tvCheck);
         arbiter = new DummyHandler(this, opponent);
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // starting delay
-                arbiter.step();
-            }
-        }, 3000);
+        imperium.setText("");
+        approbatio.setText("");
 
+        arbiter.step(false);
     }
 
     @Override
@@ -96,6 +92,7 @@ public class PracticeModeActivity extends FencyModeActivity {
                         // Allow players image change only after delay
                         userAttacking = false;
                         opponentAttacking = false;
+                        opponent.changeState(R.integer.HIGH_STAND);
                     }
                 }, ATTACK_ANIMATION_DELAY);
             }
@@ -107,11 +104,36 @@ public class PracticeModeActivity extends FencyModeActivity {
     public void updateGameView(int gameState){
         super.updateGameView(gameState);
 
-        if(gameState == 0){
-
+        if(user.getState()==arbiter.toImperium()) {
+            approbatio.setText(R.string.success);
+            arbiter.step(true);
+        }else {
+            approbatio.setText(R.string.failure);
+            arbiter.step(false);
         }
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                approbatio.setText("");
+            }
+        }, SERVICE_TIME);
     }
 
     public void impera(int actum){
+        switch(actum) {
+            case R.integer.HIGH_ATTACK:
+                imperium.setText(R.string.attackUp);
+                break;
+            case R.integer.HIGH_STAND:
+                imperium.setText(R.string.parryUp);
+                break;
+            case R.integer.LOW_ATTACK:
+                imperium.setText(R.string.attackDown);
+                break;
+            case R.integer.LOW_STAND:
+                imperium.setText(R.string.parryDown);
+                break;
+        }
     }
 }

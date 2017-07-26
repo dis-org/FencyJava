@@ -26,7 +26,7 @@ public abstract class FencyModeActivity extends FencyActivity {
         opponent = new Player(this);
         sensorHandler = new SensorHandler(this, user);
         sensorHandler.registerListeners();
-        game = new Game(user,opponent);
+        game = new Game(this,user,opponent);
         vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
     }
 

@@ -1,12 +1,12 @@
 package com.example.claudio.fency;
 
-public class Game {
+public class Game extends FencyModel {
 
     private Player playerOne;
     private Player playerTwo;
-    private int state;
 
-    public Game(Player one, Player two){
+    public Game(FencyModeActivity activity, Player one, Player two){
+        super(activity);
         playerOne = one;
         playerTwo = two;
         state = R.integer.GAME_DRAW;
@@ -28,6 +28,7 @@ public class Game {
             state = R.integer.GAME_DRAW;
         }
 
+        activity.updateGameView(state);
 
     }
 }
