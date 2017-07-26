@@ -23,7 +23,8 @@ public class PracticeModeActivity extends FencyActivity {
     private ImageView magistriIcon;
     private TextView imperium;
     private TextView approbatione;
-    private boolean attackAnimationIsOn = false;
+    private boolean dAttackAnimationIsOn = false;
+    private boolean mAttackAnimationIsOn = false;
     private Handler handler;
     private Vibrator vibrator;
 
@@ -46,23 +47,34 @@ public class PracticeModeActivity extends FencyActivity {
         discipuliArbiter = new SensorHandler(this, discipulus);
         discipuliArbiter.registerListeners();
         magistriArbiter = new DummyHandler(this, magister);
-        magistriArbiter.step();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // starting delay
+                magistriArbiter.step();
+            }
+        }, 3000);
+
     }
 
-    public void updateView(Player caller) {
+    public void updateIcon(Player caller) {
         int state = caller.getState();
         ImageView icon = null;
+        boolean attackOn = true;
 
         if(caller.equals(discipulus)){
             icon = disipuliIcon;
+            attackOn = dAttackAnimationIsOn;
         }
         else if(caller.equals(magister)){
             icon = magistriIcon;
+            attackOn = mAttackAnimationIsOn;
         }
 
         icon.setImageAlpha(255);
 
-        if(!attackAnimationIsOn) {
+        if(!attackOn) {
             //change player img
             switch (state) {
                 case R.integer.HIGH_STAND:
@@ -84,16 +96,26 @@ public class PracticeModeActivity extends FencyActivity {
             if (state==R.integer.HIGH_ATTACK || state==R.integer.LOW_ATTACK){
                 vibrator.vibrate(vibrationLength);
 
-                attackAnimationIsOn = true;
+                if(caller.equals(discipulus)){
+                    dAttackAnimationIsOn = true;
+                }
+                else if(caller.equals(magister)){
+                    mAttackAnimationIsOn = true;
+                }
 
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        // Allow player image change only after delay
-                        attackAnimationIsOn = false;
+                        // Allow players image change only after delay
+                        dAttackAnimationIsOn = false;
+                        mAttackAnimationIsOn = false;
                     }
                 }, ATTACK_ANIMATION_DELAY);
             }
         }
+    }
+
+    public void impera(int actum){
+
     }
 }

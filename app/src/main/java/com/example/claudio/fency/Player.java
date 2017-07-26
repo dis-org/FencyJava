@@ -16,7 +16,7 @@ public class Player {
         //if(state != to){
             state = to;
 
-            activity.updateView(this);
+            activity.updateIcon(this);
         //}
 
 

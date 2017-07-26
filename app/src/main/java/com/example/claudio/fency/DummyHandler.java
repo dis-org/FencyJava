@@ -1,5 +1,8 @@
 package com.example.claudio.fency;
 
+import android.os.Handler;
+import android.widget.Toast;
+
 /**
  * Created by Francesco on 25/07/2017.
  */
@@ -7,15 +10,52 @@ package com.example.claudio.fency;
 public class DummyHandler extends FencyHandler{
 
     private int state;
+    private Handler handler;
 
-    public DummyHandler(FencyActivity context, Player player) {
+    public DummyHandler(PracticeModeActivity context, Player player) {
         super(context, player);
+        handler = new Handler();
+        state = 0;
     }
 
     public void start(){
-
+        Toast.makeText(context,"FINE TUTORIAL", Toast.LENGTH_LONG);
     }
     public void step(){
 
+        //context.impera(toAction());
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Allow player image change only after delay
+                player.changeState(toAction());
+            }
+        }, 1000);
+
+        start();
+    }
+
+    public static int toAction(int state){
+        int action = -1;
+        switch (state){
+            case 0:
+                action = R.integer.HIGH_ATTACK;
+                break;
+            case 1:
+                action = R.integer.LOW_ATTACK;
+                break;
+            case 2:
+                action = R.integer.LOW_STAND;
+                break;
+            case 3:
+                action = R.integer.HIGH_STAND;
+                break;
+        }
+        return action;
+    }
+
+    private int toAction(){
+        return toAction(state);
     }
 }

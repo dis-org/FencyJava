@@ -24,7 +24,7 @@ public class SensorHandler extends FencyHandler implements SensorEventListener {
     private long startingAttackTime;
     private final int SENSOR_DELAY = SensorManager.SENSOR_DELAY_GAME;
 
-    public SensorHandler(FencyActivity context, Player player) {
+    public SensorHandler(PracticeModeActivity context, Player player) {
         super(context, player);
 
         sensorManager = (SensorManager)context.getSystemService(context.SENSOR_SERVICE);

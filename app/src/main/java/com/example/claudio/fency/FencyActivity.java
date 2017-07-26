@@ -26,4 +26,15 @@ public abstract class FencyActivity extends AppCompatActivity {
         Intent intent = new Intent(this, to);
         startActivity(intent);
     }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        goFullScreen();
+    }
 }

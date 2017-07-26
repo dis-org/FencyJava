@@ -66,6 +66,6 @@
         android:layout_toEndOf="@+id/ivPlayerState"
         android:layout_toRightOf="@+id/ivPlayerState"
         android:scaleX="-1"
-        app:srcCompat="@mipmap/fency_low_stand" />
+        app:srcCompat="@mipmap/fency_high_stand" />
 
 </RelativeLayout>
