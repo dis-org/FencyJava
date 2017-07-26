@@ -7,9 +7,9 @@ package com.example.claudio.fency;
 public abstract class FencyHandler {
 
     protected Player player;
-    protected PracticeModeActivity context;
+    protected FencyModeActivity context;
 
-    public FencyHandler(PracticeModeActivity context, Player player){
+    public FencyHandler(FencyModeActivity context, Player player){
         this.context = context;
         this.player = player;
     }

@@ -24,7 +24,7 @@ public class SensorHandler extends FencyHandler implements SensorEventListener {
     private long startingAttackTime;
     private final int SENSOR_DELAY = SensorManager.SENSOR_DELAY_GAME;
 
-    public SensorHandler(PracticeModeActivity context, Player player) {
+    public SensorHandler(FencyModeActivity context, Player player) {
         super(context, player);
 
         sensorManager = (SensorManager)context.getSystemService(context.SENSOR_SERVICE);
@@ -49,6 +49,13 @@ public class SensorHandler extends FencyHandler implements SensorEventListener {
 
         // Register sensorLinearAcc
         sensorManager.registerListener(this, sensorLinearAcceleration, SENSOR_DELAY);
+
+        //
+        start = true;
+    }
+
+    public void unregisterListeners() {
+        sensorManager.unregisterListener(this);
     }
 
     @Override
@@ -166,4 +173,6 @@ public class SensorHandler extends FencyHandler implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
+
+
 }

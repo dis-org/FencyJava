@@ -28,6 +28,13 @@ public abstract class FencyActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        //get Intent from Home
+        Intent i = getIntent();
+    }
+
+    @Override
     protected void onPause(){
         super.onPause();
     }

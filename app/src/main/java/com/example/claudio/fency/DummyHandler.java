@@ -19,7 +19,7 @@ public class DummyHandler extends FencyHandler{
     }
 
     public void start(){
-        Toast.makeText(context,"FINE TUTORIAL", Toast.LENGTH_LONG);
+        Toast.makeText(context,"FINE TUTORIAL", Toast.LENGTH_LONG).show();
     }
     public void step(){
 
@@ -30,15 +30,16 @@ public class DummyHandler extends FencyHandler{
             public void run() {
                 // Allow player image change only after delay
                 player.changeState(toAction());
+                start();
             }
         }, 1000);
 
-        start();
+
     }
 
-    public static int toAction(int state){
+    public int toAction(){
         int action = -1;
-        switch (state){
+        switch (this.state){
             case 0:
                 action = R.integer.HIGH_ATTACK;
                 break;
@@ -55,7 +56,4 @@ public class DummyHandler extends FencyHandler{
         return action;
     }
 
-    private int toAction(){
-        return toAction(state);
-    }
 }

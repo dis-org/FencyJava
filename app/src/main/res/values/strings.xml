@@ -10,4 +10,13 @@
     <string name="practice_btn_des">practice mode</string>
     <string name="practicebtnText">- Practice</string>
     <string name="duelbtnText">- Duel</string>
+    <!--Practice imperi-->
+    <string name="parryUp">Para in alto</string>
+    <string name="parryDown">Para in basso</string>
+    <string name="attackUp">Attacca alto</string>
+    <string name="attackDown">Attacca basso</string>
+    <!--Practice approbationes-->
+    <string name="success">Bravo!</string>
+    <string name="failure">Riprova</string>
+
 </resources>

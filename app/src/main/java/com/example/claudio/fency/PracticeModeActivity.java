@@ -10,7 +10,7 @@ import android.widget.TextView;
  * Created by Francesco on 25/07/2017.
  */
 
-public class PracticeModeActivity extends FencyActivity {
+public class PracticeModeActivity extends FencyModeActivity {
 
     private static final long ATTACK_ANIMATION_DELAY = 500; //milliseconds
     private final int vibrationLength = 100;
@@ -22,7 +22,7 @@ public class PracticeModeActivity extends FencyActivity {
     private ImageView disipuliIcon;
     private ImageView magistriIcon;
     private TextView imperium;
-    private TextView approbatione;
+    private TextView approbatio;
     private boolean dAttackAnimationIsOn = false;
     private boolean mAttackAnimationIsOn = false;
     private Handler handler;
@@ -42,7 +42,7 @@ public class PracticeModeActivity extends FencyActivity {
         disipuliIcon = (ImageView)findViewById(R.id.ivPlayerState);
         magistriIcon = (ImageView)findViewById(R.id.ivOpponentState);
         imperium = (TextView)findViewById(R.id.tvCommand);
-        approbatione = (TextView)findViewById(R.id.tvCheck);
+        approbatio = (TextView)findViewById(R.id.tvCheck);
 
         discipuliArbiter = new SensorHandler(this, discipulus);
         discipuliArbiter.registerListeners();

@@ -5,10 +5,10 @@ package com.example.claudio.fency;
  */
 
 public class Player {
-    private PracticeModeActivity activity;
+    private FencyModeActivity activity;
     private int state;
 
-    public Player(PracticeModeActivity activity){
+    public Player(FencyModeActivity activity){
         this.activity = activity;
     }
 
@@ -16,7 +16,7 @@ public class Player {
         //if(state != to){
             state = to;
 
-            activity.updateIcon(this);
+          //  activity.updateIcon(this);
         //}
 
 
