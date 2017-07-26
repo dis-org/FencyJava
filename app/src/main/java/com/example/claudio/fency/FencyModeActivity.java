@@ -1,16 +1,22 @@
 package com.example.claudio.fency;
 
 import android.os.Bundle;
+import android.os.Vibrator;
 
 /**
  * Created by Francesco on 26/07/2017.
  */
 
 public abstract class FencyModeActivity extends FencyActivity {
+    private final int vibrationLength = 100;
+
     protected Player user;
     protected Player opponent;
     protected SensorHandler sensorHandler;
-    protected GameManager gameManager;
+    protected Game game;
+    protected Vibrator vibrator;
+    protected boolean userAttacking = false;
+    protected boolean opponentAttacking = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -19,7 +25,9 @@ public abstract class FencyModeActivity extends FencyActivity {
         user = new Player(this);
         opponent = new Player(this);
         sensorHandler = new SensorHandler(this, user);
-        gameManager = new GameManager(user,opponent);
+        sensorHandler.registerListeners();
+        game = new Game(user,opponent);
+        vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
     }
 
     @Override
@@ -33,7 +41,16 @@ public abstract class FencyModeActivity extends FencyActivity {
         sensorHandler.registerListeners();
     }
 
+    @Override
+    protected void onStop(){
+        super.onStop();
+        finish();
+    }
+
     public abstract void updatePlayerView(Player caller);
 
-    public abstract void updateGameView(int gameState);
+    public void updateGameView(int gameState){
+        if (gameState == R.integer.GAME_DRAW)
+            vibrator.vibrate(vibrationLength);
+    }
 }

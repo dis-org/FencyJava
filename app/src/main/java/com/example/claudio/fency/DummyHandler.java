@@ -14,6 +14,7 @@ public class DummyHandler extends FencyHandler{
 
     public DummyHandler(PracticeModeActivity context, Player player) {
         super(context, player);
+        this.context = context;
         handler = new Handler();
         state = 0;
     }
@@ -21,9 +22,10 @@ public class DummyHandler extends FencyHandler{
     public void start(){
         Toast.makeText(context,"FINE TUTORIAL", Toast.LENGTH_LONG).show();
     }
+
     public void step(){
 
-        //context.impera(toAction());
+        ((PracticeModeActivity)context).impera(toAction());
 
         handler.postDelayed(new Runnable() {
             @Override

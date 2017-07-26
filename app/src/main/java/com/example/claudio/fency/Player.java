@@ -13,12 +13,13 @@ public class Player {
     }
 
     public void changeState(int to){
-        //if(state != to){
-            state = to;
 
-          //  activity.updateIcon(this);
-        //}
+        state = to;
+        activity.updatePlayerView(this);
 
+        if (state==R.integer.HIGH_ATTACK || state==R.integer.LOW_ATTACK) {
+            activity.game.changeState();
+        }
 
     }
 

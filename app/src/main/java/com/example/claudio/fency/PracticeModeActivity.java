@@ -2,7 +2,6 @@ package com.example.claudio.fency;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Vibrator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,63 +12,52 @@ import android.widget.TextView;
 public class PracticeModeActivity extends FencyModeActivity {
 
     private static final long ATTACK_ANIMATION_DELAY = 500; //milliseconds
-    private final int vibrationLength = 100;
 
-    private Player discipulus;
-    private Player magister;
-    private SensorHandler discipuliArbiter;
-    private DummyHandler magistriArbiter;
-    private ImageView disipuliIcon;
-    private ImageView magistriIcon;
+
+    private DummyHandler arbiter;
+    private ImageView discipuli;
+    private ImageView magistri;
     private TextView imperium;
     private TextView approbatio;
-    private boolean dAttackAnimationIsOn = false;
-    private boolean mAttackAnimationIsOn = false;
     private Handler handler;
-    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_mode);
         cntFullScreen = findViewById(R.id.container_practice);
-        goFullScreen();
-
-        vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
         handler = new Handler();
-        discipulus = new Player(this);
-        magister = new Player(this);
-        disipuliIcon = (ImageView)findViewById(R.id.ivPlayerState);
-        magistriIcon = (ImageView)findViewById(R.id.ivOpponentState);
+
+        discipuli = (ImageView)findViewById(R.id.ivPlayerState);
+        magistri = (ImageView)findViewById(R.id.ivOpponentState);
         imperium = (TextView)findViewById(R.id.tvCommand);
         approbatio = (TextView)findViewById(R.id.tvCheck);
-
-        discipuliArbiter = new SensorHandler(this, discipulus);
-        discipuliArbiter.registerListeners();
-        magistriArbiter = new DummyHandler(this, magister);
+        arbiter = new DummyHandler(this, opponent);
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // starting delay
-                magistriArbiter.step();
+                arbiter.step();
             }
         }, 3000);
 
     }
 
-    public void updateIcon(Player caller) {
+    @Override
+    public void updatePlayerView(Player caller) {
+
         int state = caller.getState();
         ImageView icon = null;
         boolean attackOn = true;
 
-        if(caller.equals(discipulus)){
-            icon = disipuliIcon;
-            attackOn = dAttackAnimationIsOn;
+        if(caller.equals(user)){
+            icon = discipuli;
+            attackOn = userAttacking;
         }
-        else if(caller.equals(magister)){
-            icon = magistriIcon;
-            attackOn = mAttackAnimationIsOn;
+        else if(caller.equals(opponent)){
+            icon = magistri;
+            attackOn = opponentAttacking;
         }
 
         icon.setImageAlpha(255);
@@ -94,28 +82,36 @@ public class PracticeModeActivity extends FencyModeActivity {
                     break;
             }
             if (state==R.integer.HIGH_ATTACK || state==R.integer.LOW_ATTACK){
-                vibrator.vibrate(vibrationLength);
 
-                if(caller.equals(discipulus)){
-                    dAttackAnimationIsOn = true;
+                if(caller.equals(user)){
+                    userAttacking = true;
                 }
-                else if(caller.equals(magister)){
-                    mAttackAnimationIsOn = true;
+                else if(caller.equals(opponent)){
+                    opponentAttacking = true;
                 }
 
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         // Allow players image change only after delay
-                        dAttackAnimationIsOn = false;
-                        mAttackAnimationIsOn = false;
+                        userAttacking = false;
+                        opponentAttacking = false;
                     }
                 }, ATTACK_ANIMATION_DELAY);
             }
         }
     }
 
-    public void impera(int actum){
 
+    @Override
+    public void updateGameView(int gameState){
+        super.updateGameView(gameState);
+
+        if(gameState == 0){
+
+        }
+    }
+
+    public void impera(int actum){
     }
 }
