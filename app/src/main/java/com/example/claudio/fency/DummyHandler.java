@@ -1,7 +1,6 @@
 package com.example.claudio.fency;
 
 import android.os.Handler;
-import android.widget.Toast;
 
 public class DummyHandler extends FencyHandler{
 

@@ -1,6 +1,7 @@
 package com.example.claudio.fency;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.view.View;
 public abstract class FencyActivity extends AppCompatActivity {
 
     protected View cntFullScreen;
+    protected MediaPlayer audioPlayer01;
+    protected MediaPlayer audioPlayer02;
 
     protected void goFullScreen(){
         cntFullScreen.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
@@ -32,6 +35,9 @@ public abstract class FencyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //get Intent from Home
         Intent i = getIntent();
+
+        audioPlayer01=null;
+        audioPlayer02=null;
     }
 
     @Override
@@ -43,5 +49,10 @@ public abstract class FencyActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         goFullScreen();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.claudio.fency;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 
@@ -21,7 +22,7 @@ public abstract class FencyModeActivity extends FencyActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
+        audioPlayer01 = MediaPlayer.create(this, R.raw.sword_clash);
         user = new Player(this);
         opponent = new Player(this);
         sensorHandler = new SensorHandler(this, user);
@@ -34,6 +35,11 @@ public abstract class FencyModeActivity extends FencyActivity {
     protected void onPause(){
         super.onPause();
         sensorHandler.unregisterListeners();
+        if (audioPlayer01!=null)
+            audioPlayer01.release();
+        if (audioPlayer02!=null)
+            audioPlayer02.release();
+
     }
     @Override
     protected void onResume(){
@@ -44,13 +50,26 @@ public abstract class FencyModeActivity extends FencyActivity {
     @Override
     protected void onStop(){
         super.onStop();
+        audioPlayer01 = null;
+        audioPlayer02 = null;
         finish();
     }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        onStop();
+    }
+
 
     public abstract void updatePlayerView(Player caller);
 
     public void updateGameView(int gameState){
-        if (gameState == R.integer.GAME_DRAW)
+        if (gameState == R.integer.GAME_DRAW) {
             vibrator.vibrate(vibrationLength);
+            //play sword_clash audio
+            if(audioPlayer01 !=null)
+                audioPlayer01.start();
+        }
     }
 }

@@ -1,7 +1,9 @@
 package com.example.claudio.fency;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,16 +29,16 @@ public class PracticeModeActivity extends FencyModeActivity {
         setContentView(R.layout.activity_practice_mode);
         cntFullScreen = findViewById(R.id.container_practice);
         handler = new Handler();
-
+        audioPlayer02 = MediaPlayer.create(this, R.raw.approve_01);
         discipuli = (ImageView)findViewById(R.id.ivPlayerState);
         magistri = (ImageView)findViewById(R.id.ivOpponentState);
         imperium = (TextView)findViewById(R.id.tvCommand);
         approbatio = (TextView)findViewById(R.id.tvCheck);
         arbiter = new DummyHandler(this, opponent);
-
         imperium.setText("");
         approbatio.setText("");
 
+        //start tutorial
         arbiter.step(false);
     }
 
@@ -106,6 +108,8 @@ public class PracticeModeActivity extends FencyModeActivity {
 
         if(user.getState()==arbiter.toImperium()) {
             approbatio.setText(R.string.success);
+            if(audioPlayer02!=null)
+                audioPlayer02.start();
             arbiter.step(true);
         }else {
             approbatio.setText(R.string.failure);
@@ -135,5 +139,8 @@ public class PracticeModeActivity extends FencyModeActivity {
                 imperium.setText(R.string.parryDown);
                 break;
         }
+        imperium.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
+
     }
+
 }

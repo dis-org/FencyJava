@@ -1,5 +1,7 @@
 package com.example.claudio.fency;
 
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,6 +18,11 @@ public class HomeActivity extends FencyActivity implements View.OnClickListener{
 
         toPracticeMode = findViewById(R.id.btnPractice);
         toPracticeMode.setOnClickListener(this);
+
+        audioPlayer01 = MediaPlayer.create(this, R.raw.menu_theme);
+        audioPlayer01.setLooping(true);
+
+        audioPlayer02 = MediaPlayer.create(this, R.raw.turn_page);
     }
 
 
@@ -25,10 +32,22 @@ public class HomeActivity extends FencyActivity implements View.OnClickListener{
 
         switch(id){
             case R.id.btnPractice:
+                if (audioPlayer02!=null)
+                    audioPlayer02.start();
                 switchActivity(PracticeModeActivity.class);
                 break;
         }
     }
 
+    @Override
+    protected void onPause(){
+        audioPlayer01.pause();
+        super.onPause();
+    }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        audioPlayer01.start();
+    }
 }
