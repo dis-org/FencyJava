@@ -16,12 +16,12 @@ public class Game extends FencyModel {
         int s1 = playerOne.getState();
         int s2 = playerTwo.getState();
 
-        if(s1==R.integer.HIGH_ATTACK && s2==R.integer.LOW_STAND ||
-            s1==R.integer.LOW_ATTACK && s2==R.integer.HIGH_STAND){
+        if((s1==R.integer.HIGH_ATTACK && (s2==R.integer.LOW_STAND || s2==R.integer.INVALID)) ||
+          (s1==R.integer.LOW_ATTACK && (s2==R.integer.HIGH_STAND || s2==R.integer.INVALID))) {
             state = R.integer.GAME_P1;
         }
-        else if(s2==R.integer.HIGH_ATTACK && s1==R.integer.LOW_STAND ||
-                s2==R.integer.LOW_ATTACK && s1==R.integer.HIGH_STAND){
+        else if((s2==R.integer.HIGH_ATTACK && (s1==R.integer.LOW_STAND || s1==R.integer.INVALID)) ||
+                (s2==R.integer.LOW_ATTACK && (s1==R.integer.HIGH_STAND || s1==R.integer.INVALID))) {
             state = R.integer.GAME_P2;
         }
         else {

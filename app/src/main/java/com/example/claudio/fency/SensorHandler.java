@@ -107,10 +107,7 @@ public class SensorHandler extends FencyHandler implements SensorEventListener {
 
                 switch (state) {
                     case 0:
-                        if (yCurrent >= -sogliaY && yCurrent <= sogliaY) {
-                            //stay in state 0
-                        }
-                        else if (yCurrent > sogliaY && yDelta > 0
+                        if (yCurrent > sogliaY && yDelta > 0
                                 && player.getState() != R.integer.INVALID) {
                             //save the starting time of the (possible) attack
                             startingAttackTime = event.timestamp;
