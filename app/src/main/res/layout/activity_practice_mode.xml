@@ -9,14 +9,20 @@
     tools:context="com.example.claudio.fency.PracticeModeActivity">
 
     <ImageView
-        android:id="@+id/ivCheck"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:visibility="invisible"
-        app:srcCompat="@android:color/holo_green_light" />
+        android:id="@+id/ivOpponentState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/ivPlayerState"
+        android:layout_marginEnd="50dp"
+        android:scaleX="-1"
+        app:srcCompat="@mipmap/fency_low_stand"
+        tools:layout_conversion_absoluteHeight="140dp"
+        tools:layout_conversion_absoluteWidth="164dp"
+        tools:layout_conversion_absoluteX="151dp"
+        tools:layout_conversion_absoluteY="307dp"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="307dp" />
 
     <TextView
         android:id="@+id/tvCommand"
@@ -24,20 +30,25 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="128dp"
         android:fontFamily="cursive"
         android:text="tutorial command here"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/brown_ink"
         android:textSize="36sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:layout_conversion_absoluteHeight="44dp"
+        tools:layout_conversion_absoluteWidth="384dp"
+        tools:layout_conversion_absoluteX="0dp"
+        tools:layout_conversion_absoluteY="125dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="125dp" />
 
     <TextView
         android:id="@+id/tvCheck"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvCommand"
         android:layout_marginTop="32dp"
@@ -47,27 +58,28 @@
         android:textAllCaps="true"
         android:textColor="@color/black_overlay"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:layout_conversion_absoluteHeight="27dp"
+        tools:layout_conversion_absoluteWidth="384dp"
+        tools:layout_conversion_absoluteX="0dp"
+        tools:layout_conversion_absoluteY="201dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="201dp" />
 
     <ImageView
         android:id="@+id/ivPlayerState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="62dp"
-        android:layout_marginStart="59dp"
-        app:srcCompat="@mipmap/fency_high_stand"
-        android:layout_marginTop="83dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/tvCheck"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:id="@+id/ivOpponentState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivPlayerState"
-        android:layout_toEndOf="@+id/ivPlayerState"
-        android:layout_toRightOf="@+id/ivPlayerState"
-        android:scaleX="-1"
-        app:srcCompat="@mipmap/fency_high_stand" />
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="64dp"
+        app:srcCompat="@mipmap/fency_low_stand"
+        tools:layout_conversion_absoluteHeight="140dp"
+        tools:layout_conversion_absoluteWidth="164dp"
+        tools:layout_conversion_absoluteX="54dp"
+        tools:layout_conversion_absoluteY="307dp"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="307dp" />
 
 </RelativeLayout>
