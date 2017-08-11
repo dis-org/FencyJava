@@ -16,7 +16,7 @@
     <string name="attackUp">Attacca in alto!</string>
     <string name="attackDown">Attacca in basso!</string>
     <!--Practice approbationes-->
-    <string name="success">Bravo!</string>
+    <string name="success">Bravo</string>
     <string name="failure">Riprova</string>
 
 </resources>

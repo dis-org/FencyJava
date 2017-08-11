@@ -1,12 +1,16 @@
 package com.example.claudio.fency;
 
+import android.graphics.Color;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.Switch;
 
 public class HomeActivity extends FencyActivity implements View.OnClickListener{
 
+    private View btnAudio01;
     private View toPracticeMode;
 
     @Override
@@ -18,6 +22,9 @@ public class HomeActivity extends FencyActivity implements View.OnClickListener{
 
         toPracticeMode = findViewById(R.id.btnPractice);
         toPracticeMode.setOnClickListener(this);
+
+        btnAudio01 = findViewById(R.id.audio01_box);
+        btnAudio01.setOnClickListener(this);
 
         audioPlayer01 = MediaPlayer.create(this, R.raw.menu_theme);
         audioPlayer01.setLooping(true);
@@ -35,6 +42,17 @@ public class HomeActivity extends FencyActivity implements View.OnClickListener{
                 if (audioPlayer02!=null)
                     audioPlayer02.start();
                 switchActivity(PracticeModeActivity.class);
+                break;
+            case R.id.audio01_box:
+                CheckBox s1 = (CheckBox) view;
+                if (s1.isChecked()){
+                    audioPlayer01.start();
+                    s1.setTextColor(0xDC110901);
+                }
+                else {
+                    audioPlayer01.pause();
+                    s1.setTextColor(Color.WHITE);
+                }
                 break;
         }
     }

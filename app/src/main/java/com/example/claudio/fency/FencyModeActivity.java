@@ -2,6 +2,7 @@ package com.example.claudio.fency;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
 
 /**
@@ -16,6 +17,8 @@ public abstract class FencyModeActivity extends FencyActivity {
     protected SensorHandler sensorHandler;
     protected Game game;
     protected Vibrator vibrator;
+    protected Handler handler;
+    protected Runnable runnable;
     protected boolean userAttacking = false;
     protected boolean opponentAttacking = false;
 
@@ -29,6 +32,7 @@ public abstract class FencyModeActivity extends FencyActivity {
         sensorHandler.registerListeners();
         game = new Game(this,user,opponent);
         vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+        handler = new Handler();
     }
 
     @Override
@@ -49,10 +53,10 @@ public abstract class FencyModeActivity extends FencyActivity {
 
     @Override
     protected void onStop(){
-        super.onStop();
         audioPlayer01 = null;
         audioPlayer02 = null;
         finish();
+        super.onStop();
     }
 
     @Override

@@ -17,23 +17,26 @@ public class PracticeModeActivity extends FencyModeActivity {
     private static final long SERVICE_TIME= 1500;
 
     private DummyHandler arbiter;
-    private ImageView discipuli;
-    private ImageView magistri;
-    private TextView imperium;
-    private TextView approbatio;
-    private Handler handler;
+    private ImageView discipuli, magistri;
+    private TextView imperium, approbatio, sequentia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_mode);
         cntFullScreen = findViewById(R.id.container_practice);
-        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                approbatio.setText("");
+            }
+        };
         audioPlayer02 = MediaPlayer.create(this, R.raw.approve_01);
         discipuli = (ImageView)findViewById(R.id.ivPlayerState);
         magistri = (ImageView)findViewById(R.id.ivOpponentState);
         imperium = (TextView)findViewById(R.id.tvCommand);
         approbatio = (TextView)findViewById(R.id.tvCheck);
+        sequentia = (TextView)findViewById(R.id.tvCombo);
         arbiter = new DummyHandler(this, opponent);
         imperium.setText("");
         approbatio.setText("");
@@ -83,20 +86,25 @@ public class PracticeModeActivity extends FencyModeActivity {
 
                 if(caller.equals(user)){
                     userAttacking = true;
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Allow user image change only after delay
+                            userAttacking = false;
+                        }
+                    }, ATTACK_ANIMATION_DELAY);
                 }
                 else if(caller.equals(opponent)){
                     opponentAttacking = true;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Allow opponent image and state change only after delay
+                            opponentAttacking = false;
+                            opponent.changeState(R.integer.HIGH_STAND);
+                        }
+                    }, ATTACK_ANIMATION_DELAY);
                 }
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Allow players image change only after delay
-                        userAttacking = false;
-                        opponentAttacking = false;
-                        opponent.changeState(R.integer.HIGH_STAND);
-                    }
-                }, ATTACK_ANIMATION_DELAY);
             }
         }
     }
@@ -115,16 +123,16 @@ public class PracticeModeActivity extends FencyModeActivity {
             approbatio.setText(R.string.failure);
             arbiter.step(false);
         }
+        //update combo TextView
+        sequentia.setText(""+ arbiter.getCombo());
+        sequentia.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                approbatio.setText("");
-            }
-        }, SERVICE_TIME);
+        //clear the approbatio label with a delay
+        handler.postDelayed(runnable, SERVICE_TIME);
     }
 
     public void impera(int actum){
+
         switch(actum) {
             case R.integer.HIGH_ATTACK:
                 imperium.setText(R.string.attackUp);
@@ -141,6 +149,13 @@ public class PracticeModeActivity extends FencyModeActivity {
         }
         imperium.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
 
+    }
+
+    @Override
+    protected void onStop(){
+        handler.removeCallbacks(runnable);
+        arbiter.onExit();
+        super.onStop();
     }
 
 }
