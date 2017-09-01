@@ -12,6 +12,7 @@ import android.view.View;
 
 public abstract class FencyActivity extends AppCompatActivity {
 
+    protected Intent startingIntent;
     protected View cntFullScreen;
     protected MediaPlayer audioPlayer01;
     protected MediaPlayer audioPlayer02;
@@ -34,7 +35,7 @@ public abstract class FencyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         //get Intent from Home
-        Intent i = getIntent();
+        startingIntent = getIntent();
 
         audioPlayer01=null;
         audioPlayer02=null;

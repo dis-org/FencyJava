@@ -27,9 +27,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.014"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_editor_absoluteX="8dp" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -47,7 +49,8 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1">
+        tools:layout_constraintTop_creator="1"
+        android:id="@+id/container_menu">
 
         <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
@@ -58,15 +61,13 @@
             android:layout_width="wrap_content"
             android:layout_height="165dp"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/logolayoutmargin"
-            android:layout_marginBottom="@dimen/logolayoutmargin"
-            android:layout_marginEnd="@dimen/logolayoutmargin"
             android:layout_marginLeft="@dimen/logolayoutmargin"
             android:layout_marginRight="@dimen/logolayoutmargin"
-            android:layout_marginStart="@dimen/logolayoutmargin"
-            android:layout_marginTop="@dimen/logolayoutmargin"
+            android:layout_marginTop="32dp"
             android:contentDescription="@string/fency_logo_des"
-            app:srcCompat="@mipmap/img_fency_logo" />
+            app:srcCompat="@mipmap/img_fency_logo"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
@@ -75,7 +76,12 @@
             android:id="@+id/btnPractice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/ivLogo"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:fontFamily="cursive"
             android:text="@string/practicebtnText"
             android:textAlignment="center"
@@ -88,7 +94,12 @@
             android:id="@+id/btnDuel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/btnPractice"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:fontFamily="cursive"
             android:text="@string/duelbtnText"
             android:textAlignment="center"
@@ -96,9 +107,23 @@
             android:textColor="@color/brown_ink"
             android:textSize="36sp"
             android:textStyle="bold"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BETA"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintHorizontal_bias="0.467"
+            tools:layout_editor_absoluteY="103dp"
+            android:layout_alignTop="@+id/btnDuel"
+            android:layout_alignStart="@+id/ivLogo"
+            android:layout_marginStart="64dp" />
+
+    </RelativeLayout>
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->

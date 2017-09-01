@@ -11,7 +11,7 @@ import android.widget.Switch;
 public class HomeActivity extends FencyActivity implements View.OnClickListener{
 
     private View btnAudio01;
-    private View toPracticeMode;
+    private View toPracticeMode, toDuelMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,9 @@ public class HomeActivity extends FencyActivity implements View.OnClickListener{
 
         toPracticeMode = findViewById(R.id.btnPractice);
         toPracticeMode.setOnClickListener(this);
+
+        toDuelMode = findViewById(R.id.btnDuel);
+        toDuelMode.setOnClickListener(this);
 
         btnAudio01 = findViewById(R.id.audio01_box);
         btnAudio01.setOnClickListener(this);
@@ -42,6 +45,11 @@ public class HomeActivity extends FencyActivity implements View.OnClickListener{
                 if (audioPlayer02!=null)
                     audioPlayer02.start();
                 switchActivity(PracticeModeActivity.class);
+                break;
+            case R.id.btnDuel:
+                if (audioPlayer02!=null)
+                    audioPlayer02.start();
+                switchActivity(DuelModeActivity.class);
                 break;
             case R.id.audio01_box:
                 CheckBox s1 = (CheckBox) view;

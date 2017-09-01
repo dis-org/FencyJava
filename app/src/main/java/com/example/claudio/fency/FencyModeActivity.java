@@ -49,6 +49,8 @@ public abstract class FencyModeActivity extends FencyActivity {
     protected void onResume(){
         super.onResume();
         sensorHandler.registerListeners();
+        audioPlayer01 = MediaPlayer.create(this, R.raw.sword_clash);
+        audioPlayer02 = null;
     }
 
     @Override

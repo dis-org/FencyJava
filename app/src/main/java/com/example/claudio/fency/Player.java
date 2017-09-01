@@ -12,9 +12,15 @@ public class Player extends FencyModel{
     }
 
     public void changeState(int to){
+        boolean same = (to==state);
 
         state = to;
         activity.updatePlayerView(this);
+        //TODO: temporary action
+        if(activity.getClass().equals(DuelModeActivity.class)) {
+            if(this.equals(activity.user) && !same)
+                ((DuelModeActivity) activity).sendPlayerState(to);
+        }
 
         if (state==R.integer.HIGH_ATTACK || state==R.integer.LOW_ATTACK) {
             activity.game.changeState();
